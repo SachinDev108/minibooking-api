@@ -24,6 +24,8 @@ gem 'puma', '~> 3.0'
 gem 'active_model_serializers', '~> 0.10.0'
 # Complete validation of dates, times and datetimes
 gem 'validates_timeliness', '~> 4.0'
+# support for Cross-Origin Resource Sharing
+gem 'rack-cors'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
