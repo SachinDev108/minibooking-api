@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :update, :destroy]
+  before_action :set_rental, only: [:get_price]
 
   # GET /bookings
   def index
@@ -38,10 +39,20 @@ class BookingsController < ApplicationController
     @booking.destroy
   end
 
+  # GET /bookings/rental_id/get_price
+  def get_price
+    render json: { price: @rental.calculate_price(start_at, end_at)}, status: 200
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
       @booking = Booking.find(params[:id])
+    end    
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_booking
+      @rental = Rental.find(params[:rental_id])
     end
 
     # Only allow a trusted parameter "white list" through.
