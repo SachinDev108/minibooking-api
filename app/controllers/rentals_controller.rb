@@ -4,13 +4,12 @@ class RentalsController < ApplicationController
   # GET /rentals
   def index
     @rentals = Rental.all
-
-    render json: @rentals
+    render json: { rentals: @rentals }
   end
 
   # GET /rentals/1
   def show
-    render json: @rental
+    render json: { rental: @rental }
   end
 
   # POST /rentals
@@ -18,18 +17,18 @@ class RentalsController < ApplicationController
     @rental = Rental.new(rental_params)
 
     if @rental.save
-      render json: @rental, status: :created, location: @rental
+      render json: { rental: @rental }, status: :created, localtion: @rental
     else
-      render json: @rental.errors, status: :unprocessable_entity
+      render json: { errors: @rental.errors }, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /rentals/1
   def update
     if @rental.update(rental_params)
-      render json: @rental
+      render json: { rental: @rental }
     else
-      render json: @rental.errors, status: :unprocessable_entity
+      render json: { errors: @rental.errors }, status: :unprocessable_entity
     end
   end
 
