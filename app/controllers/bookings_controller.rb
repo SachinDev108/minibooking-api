@@ -5,12 +5,12 @@ class BookingsController < ApplicationController
   def index
     @bookings = Booking.all
 
-    render json: @bookings
+    render json:  { bookings: @bookings }
   end
 
   # GET /bookings/1
   def show
-    render json: @booking
+    render json: { booking: @booking }
   end
 
   # POST /bookings
