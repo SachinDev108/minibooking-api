@@ -9,7 +9,7 @@ class RentalsController < ApplicationController
 
   # GET /rentals/1
   def show
-    render json: { rental: @rental }
+    render json: { rental: @rental, bookings: @rental.bookings }
   end
 
   # POST /rentals
@@ -19,7 +19,7 @@ class RentalsController < ApplicationController
     if @rental.save
       render json: { rental: @rental }, status: :created, localtion: @rental
     else
-      render json: { errors: @rental.errors }, status: :unprocessable_entity
+      render json: @rental.errors  , status: 422
     end
   end
 

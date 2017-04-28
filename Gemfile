@@ -20,8 +20,6 @@ gem 'puma', '~> 3.0'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-# serialize active record
-gem 'active_model_serializers', '~> 0.10.0'
 # Complete validation of dates, times and datetimes
 gem 'validates_timeliness', '~> 4.0'
 # support for Cross-Origin Resource Sharing

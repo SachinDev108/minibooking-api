@@ -1,6 +1,5 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :update, :destroy]
-  before_action :set_rental, only: [:get_price]
 
   # GET /bookings
   def index
@@ -16,12 +15,13 @@ class BookingsController < ApplicationController
 
   # POST /bookings
   def create
-    @booking = Booking.new(booking_params)
+    rental = Rental.find(params[:booking][:rental])
+    @booking = rental.bookings.new(booking_params)
 
     if @booking.save
-      render json: @booking, status: :created, location: @booking
+      render json: { booking: @booking }, status: :created, location: @booking
     else
-      render json: @booking.errors, status: :unprocessable_entity
+      render json: {errors: @booking.errors }, status: :unprocessable_entity
     end
   end
 
@@ -48,15 +48,10 @@ class BookingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
       @booking = Booking.find(params[:id])
-    end    
-
-    # Use callbacks to share common setup or constraints between actions.
-    def set_booking
-      @rental = Rental.find(params[:rental_id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def booking_params
-      params.require(:booking).permit(:start_at, :end_at, :client_email, :price)
+      params.require(:booking).permit(:start_at, :end_at, :client_email, :price, :rental_id)
     end
 end
