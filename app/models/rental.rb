@@ -1,6 +1,8 @@
 class Rental < ApplicationRecord
   # Validations
   validates :name, :daily_rates, presence: true
+  validates :daily_rates, numericality: { greater_than: 0 }
+  validates :name, uniqueness: true
   
   # Associations
   has_many :bookings
