@@ -15,7 +15,6 @@ class Booking < ApplicationRecord
 
   private
   def book_time_overlap
-    byebug
   	booking = rental.bookings.where(start_at: start_at..end_at, end_at: start_at..end_at)
     return unless booking.present?
     errors.add(:base, 'booking time is not available')
