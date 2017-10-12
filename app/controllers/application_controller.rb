@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
 
-  # before_action :check_auth_token
+  before_action :check_auth_token
 
   private
   def check_auth_token
